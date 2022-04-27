@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,27 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', [TestController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
+
+// Route::get('/', [TestController::class, 'test']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/contacto', function(){
+//     return 'Contactame';
+// })->name('contacto');
+
+// Route::get('/custom', function() {
+//     $msj = 'Mensaje desde el server UwU';
+//     $data =  array(
+//         'msj' => $msj,
+//         'edad' => 15
+//     );
+//     return view('custom', $data);
+// });
