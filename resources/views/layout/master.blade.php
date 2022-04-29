@@ -7,9 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>{{ $name }}</h1>
-    {{ $age }}
-    <br>
-    {!! $html !!}
+    <h1>Dashboard</h1>
+    @yield('content')
 </body>
 </html>
