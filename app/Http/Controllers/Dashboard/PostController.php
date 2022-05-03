@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\StoreRequest;
 
 class PostController extends Controller
 {
@@ -16,7 +18,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        echo 'Hola mundo';
+        $posts = Post::paginate(2);
+        return view('dashboard.post.index', compact('posts'));
     }
 
     /**
@@ -36,8 +39,18 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
+        //$request->validate(StoreRequest::myRules());
+        //$validated = Validator::make($request->all(), StoreRequest::myRules());
+        // dd($validated->errors());
+        // dd($validated->fails());
+        
+        // $data = $request->validated();
+        // $data['slug'] = Str::slug($data['title'], '-');
+        // dd($data);
+
+        //$data = array_merge($request->all(), ['image' => '']);
         Post::create($request->all());
     }
 
@@ -49,7 +62,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.create', compact('categories'));
     }
 
     /**
@@ -60,7 +74,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.edit', compact('categories', 'post'));
     }
 
     /**
