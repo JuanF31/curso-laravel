@@ -19,6 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        //dd(Category::find(1)->posts);
         $posts = Post::paginate(2);
         return view('dashboard.post.index', compact('posts'));
     }
@@ -76,6 +77,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
         $categories = Category::pluck('id', 'title');
         return view('dashboard.post.edit', compact('categories', 'post'));
     }
