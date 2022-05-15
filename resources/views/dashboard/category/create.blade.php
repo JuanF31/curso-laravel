@@ -6,6 +6,6 @@
     <h1>Crear Post</h1>
     @include('dashboard.fragment._errors-form')
     <form action="{{ route('category.store') }}" method="POST">
-        @include('dashboard.post._form')
+        @include('dashboard.category._form')
     </form>
 @endsection

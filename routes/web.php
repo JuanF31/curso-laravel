@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\CategoryController;
-use Illuminate\Support\Facades\Route;
-
+use App\Http\Middleware\TestMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +15,48 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function(){
+
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('post', PostController::class);
-Route::resource('category', CategoryController::class);
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
+    // Route::resource('post', PostController::class)->only(['show']);
+    // Route::resource('post', PostController::class)->except(['show']);
+    // Route::resource('category', CategoryController::class);
+    Route::get('/', function(){
+        return view('dashboard');
+    })->name('dashboard');
+    Route::resources([
+        'post' => PostController::class,
+        'category' => CategoryController::class
+    ]);
+});
+
+require __DIR__.'/auth.php';
+
+// Route::get('/test/{id?}', function($id = 10){
+//     echo "El argumento es $id";
+// });
+
+// Route::controller(PostController::class)->group(function(){
+//     Route::get('post', 'index')->name('post.index');
+//     Route::get('post/{post}', 'show')->name('post.show');
+//     Route::get('post/create', 'create')->name('post.create');
+//     Route::get('post/{post}/edit', 'edit')->name('post.edit');
+
+//     Route::post('post', 'store')->name('post.store');
+//     Route::put('post/{post}', 'update')->name('post.update');
+//     Route::delete('post/{post}', 'delete')->name('post.destroy');
+// });
+
+Route::middleware([TestMiddleware::class])->group(function(){
+    Route::get('/test/{id?}', function($id = 10){
+        echo "El argumento es $id";
+    });
+});
+
+
 
 /*Una ruta del tipo recurso ahorra la definicion de todas las 
 siguientes rutas */

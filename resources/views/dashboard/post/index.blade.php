@@ -1,3 +1,4 @@
+
 @extends('dashboard.layout')
 
 @section('title')
@@ -5,8 +6,8 @@
 @endsection
 
 @section('content')
-    <a href="{{ route('post.create') }}">Crear</a>
-    <table>
+    <a class="btn btn-success my-3" href="{{ route('post.create') }}">Crear</a>
+    <table class="table mb-3">
         <thead>
             <tr>
                 <th>T&iacute;tulo</th>
@@ -20,14 +21,14 @@
                 <tr>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->category->title }}</td>
-                    <td>{{ $post->posted }}</td>
+                    <td>{{ $post->posted == 'yes' ? 'Si' : 'No' }}</td>
                     <td>
-                        <a href="{{ route('post.edit', $post) }}">Editar</a>
-                        <a href="{{ route('post.show', $post) }}">Ver</a>
+                        <a class="mt-2 btn btn-primary" href="{{ route('post.edit', $post) }}">Editar</a>
+                        <a class="mt-2 btn btn-primary" href="{{ route('post.show', $post) }}">Ver</a>
                         <form action="{{ route('post.destroy', $post) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Eliminar</button>
+                            <button class="mt-2 btn btn-danger" type="submit">Eliminar</button>
                         </form>
                     </td>
                 </tr>

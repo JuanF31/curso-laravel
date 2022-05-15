@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <h1>{{ $post->title }}</h1>
-    <p>{{ $post->posted }}</p>
+    <p>{{ $post->posted == 'yes' ? 'Si' : 'No' }}</p>
     <p>{{ $post->description}}</p>
     <div>{{ $post->content }}</div>
 @endsection
