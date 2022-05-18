@@ -20,18 +20,45 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
+
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'admin']], function(){
     // Route::resource('post', PostController::class)->only(['show']);
     // Route::resource('post', PostController::class)->except(['show']);
     // Route::resource('category', CategoryController::class);
     Route::get('/', function(){
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/control', function(){
+        return 'Panel de control';
+    });
     Route::resources([
         'post' => PostController::class,
         'category' => CategoryController::class
     ]);
+
 });
+
+Route::group(['prefix' => 'control', 'middleware' => ['auth', 'user']], function(){
+    Route::get('/', function(){
+        return 'Panel de control';
+    });
+});
+
+// Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
+//     Route::get('/', function(){
+//         return view('dashboard');
+//     })->middleware(['admin'])->name('dashboard');
+
+
+//     Route::resource('post', PostController::class)->middleware(['admin']);
+//     Route::resource('category', CategoryController::class)->middleware(['admin']);
+
+
+//     Route::get('/control', function(){
+//         return 'Panel de control';
+//     })->middleware(['user', 'admin']);
+// });
 
 require __DIR__.'/auth.php';
 

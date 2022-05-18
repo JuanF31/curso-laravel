@@ -8,5 +8,18 @@
 </head>
 <body>
 
+    <h1>Bienvenido </h1>
+    {{ Auth::user() }}
+
+    @if (Auth::user())
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button>Cerrar sesion</button>
+        </form>  
+    @endif
+
+
+
+
 </body>
 </html>
