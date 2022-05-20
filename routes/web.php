@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Web\BlogController;
 use App\Http\Middleware\TestMiddleware;
 
 /*
@@ -29,9 +30,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'admin']], funct
     Route::get('/', function(){
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/control', function(){
-        return 'Panel de control';
-    });
     Route::resources([
         'post' => PostController::class,
         'category' => CategoryController::class
@@ -39,12 +37,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'admin']], funct
 
 });
 
-Route::group(['prefix' => 'control', 'middleware' => ['auth', 'user']], function(){
-    Route::get('/', function(){
-        return 'Panel de control';
+Route::group(['prefix' => 'blog'], function(){
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('/','index');
     });
 });
-
 // Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 //     Route::get('/', function(){
 //         return view('dashboard');
