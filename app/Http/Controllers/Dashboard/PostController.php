@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\PutRequest;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Post\StoreRequest;
 
 class PostController extends Controller
@@ -99,6 +100,20 @@ class PostController extends Controller
         $post->update($data);
         //$request->session()->flash('status', 'Registro actualizado');
         return to_route('post.index')->with('status', 'Registro actualizado');
+
+        // $data = $request->all();
+        // $filename = time();
+        // $guessExtension = $request->file('image')->guessExtension();
+        // $file = $request->file('image')->storeAs('public/image', $filename.'.'.$guessExtension  ,'local');
+
+
+
+
+        // dd($file);
+        // //return Storage::download('public\image\PDnEoaqEWZyhVa4ytuEWRAiJWIBlPCiBwdMFwEX5.png');
+
+        // //php artisan storage:link
+        // //dd($request->image->store('public/image', 'pablo.png'));
     }
 
     /**
