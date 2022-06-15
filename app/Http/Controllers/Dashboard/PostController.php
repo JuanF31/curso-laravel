@@ -108,12 +108,22 @@ class PostController extends Controller
 
 
 
-
-        // dd($file);
         // //return Storage::download('public\image\PDnEoaqEWZyhVa4ytuEWRAiJWIBlPCiBwdMFwEX5.png');
 
         // //php artisan storage:link
         // //dd($request->image->store('public/image', 'pablo.png'));
+
+        //===== Storage subir archivo ======//
+            // $filename = time();
+            // $extension = $request->file('image')->guessExtension();
+            // dd($request->file('image')->storeAs('public/images', $filename . '.' . $extension, 'local'));
+        
+        //===== Storage descargar archivo ======//
+        //return Storage::download('public/images/1655259924.png');
+
+        ////===== Storage url archivo ======//
+        // $url = Storage::url('public/images/1655259924.png');
+        // return  $_SERVER['SERVER_NAME'];
     }
 
     /**
